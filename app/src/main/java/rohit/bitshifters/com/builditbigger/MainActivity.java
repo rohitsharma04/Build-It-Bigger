@@ -16,6 +16,7 @@
 
 package rohit.bitshifters.com.builditbigger;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,13 +24,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.bitshifters.rohit.jokes.JokesTeller;
 import com.bitshifters.rohit.jokeviewerlibrary.JokeViewer;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mContext = getApplicationContext();
     }
 
     @Override
@@ -62,10 +65,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view){
-        String randomJoke = JokesTeller.getRandomJoke();
-//        Toast.makeText(this, randomJoke, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this,JokeViewer.class);
-        intent.putExtra(JokeViewer.JOKE_EXTRA,randomJoke);
-        startActivity(intent);
+        new RetrieveJokeTask(new RetrieveJokeTask.Listener() {
+            @Override
+            public void onJokeLoaded(String joke) {
+                Intent intent = new Intent(mContext, JokeViewer.class);
+                intent.putExtra(JokeViewer.JOKE_EXTRA, joke);
+                startActivity(intent);
+            }
+        }).execute();
     }
 }

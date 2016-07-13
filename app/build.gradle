@@ -29,4 +29,5 @@ dependencies {
 
     compile project(':JokeTellerLibrary')
     compile project(':JokeViewerLibrary')
+    compile project(path: ':backend', configuration: 'android-endpoints')
 }
