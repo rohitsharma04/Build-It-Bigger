@@ -28,14 +28,25 @@
     <TextView android:text="@string/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/instructions_text_view"/>
+        android:id="@+id/instructions_text_view"
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/instructions_text_view"
+        android:minHeight="200dp"
+        android:minWidth="200dp"
+        android:background="@drawable/circular_shape"
         android:text="@string/button_text"
-        android:onClick="tellJoke" />
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:onClick="tellJoke"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
