@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+/**
+ * Created by rohit on 7/17/16.
+ */
 package rohit.bitshifters.com.builditbigger;
 
 import android.content.Context;
@@ -28,6 +31,9 @@ import android.widget.Button;
 import com.bitshifters.rohit.jokeviewerlibrary.JokeViewer;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+
+import rohit.bitshifters.com.builditbigger.R;
+import rohit.bitshifters.com.builditbigger.RetrieveJokeTask;
 
 /**
  * A placeholder fragment containing a simple view.

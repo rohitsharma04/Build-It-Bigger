@@ -39,7 +39,7 @@ public class RetrieveJokeTask extends AsyncTask<Void, Void, String> {
     /**
      * Interface definition for a callback to be invoked when jokes are loaded.
      */
-    interface Listener {
+    public interface Listener {
         void onJokeLoaded(String joke);
     }
 
