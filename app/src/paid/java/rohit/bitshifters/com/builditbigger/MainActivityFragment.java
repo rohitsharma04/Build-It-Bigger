@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.bitshifters.rohit.jokeviewerlibrary.JokeViewer;
 
@@ -36,6 +37,7 @@ import com.bitshifters.rohit.jokeviewerlibrary.JokeViewer;
 public class MainActivityFragment extends Fragment {
 
     private Context mContext;
+    private ProgressBar mProgressBar;
 
     public MainActivityFragment() {
     }
@@ -46,15 +48,18 @@ public class MainActivityFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
         mContext = root.getContext();
+        mProgressBar = (ProgressBar) root.findViewById(R.id.joke_loading_spinner);
 
         //Setting up button
         Button button = (Button)  root.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgressBar.setVisibility(View.VISIBLE);
                 new RetrieveJokeTask(new RetrieveJokeTask.Listener() {
                     @Override
                     public void onJokeLoaded(String joke) {
+                        mProgressBar.setVisibility(View.GONE);
                         Intent intent = new Intent(mContext, JokeViewer.class);
                         intent.putExtra(JokeViewer.JOKE_EXTRA, joke);
                         startActivity(intent);
