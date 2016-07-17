@@ -16,12 +16,16 @@
 
 package rohit.bitshifters.com.builditbigger;
 
-import android.support.v4.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.bitshifters.rohit.jokeviewerlibrary.JokeViewer;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -29,6 +33,8 @@ import com.google.android.gms.ads.AdView;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+
+    private Context mContext;
 
     public MainActivityFragment() {
     }
@@ -46,6 +52,26 @@ public class MainActivityFragment extends Fragment {
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
+
+        mContext = root.getContext();
+
+        //Setting up button
+        Button button = (Button)  root.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new RetrieveJokeTask(new RetrieveJokeTask.Listener() {
+                    @Override
+                    public void onJokeLoaded(String joke) {
+                        Intent intent = new Intent(mContext, JokeViewer.class);
+                        intent.putExtra(JokeViewer.JOKE_EXTRA, joke);
+                        startActivity(intent);
+                    }
+                }).execute();
+            }
+        });
+
+
         return root;
     }
 }
